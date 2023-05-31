@@ -1,0 +1,94 @@
+Hey everyone! It's great to see you all here. I'm Hamza, and alongside my partner Talha, we're thrilled to share with you the remarkable code of our DSP project.
+
+Now, let's delve into our project's intricacies. We've got four key files lined up: the main file, Project_of_ADSP.m, followed by amplfySignal.m, fourierTransform.m, and lastly, recoverSignal.m. Get ready to explore each file's fascinating code in detail.
+
+Our approach to unraveling the code is designed to enhance your understanding. We'll be highlighting the lines within the code, allowing you to grasp the concepts more effectively. Get ready for a comprehensive walkthrough!
+
+---------------------------------------------------------------------------------------------------------------------
+
+Now, it's time to take a closer look at the heart of our project, the main file - Project_of_ADSP.m. Without further ado, let's uncover the code within this file that powers our entire project.
+
+This line sets up a prompt message asking the user if they want to record their own audio for further processing.
+
+This line sets the caption for the message box or dialog box that will appear when prompting the user.
+
+This line displays a dialog box with the prompt message and title, along with two buttons labeled 'Yes' and 'No'. The user's response is stored in the variable `button`.
+
+This line checks if the user clicked the 'Yes' button by comparing the value stored in `button` with the string 'Yes'. The comparison is case-insensitive (`strcmpi`).
+
+This line creates an `audiorecorder` object named `z`, which will be used to record audio.
+
+This line reads an image file named 'microphone.png' and stores it in the variable `myicon`. This image will be used as the custom icon for the message box.
+
+This line displays a message box with the message 'Speak Up, I am Recording...' and the title 'Recording'. It uses a custom icon (`myicon`) to indicate that audio is being recorded. The handle to the message box is stored in the variable `h`.
+
+This line starts recording audio using the `audiorecorder` object `z`. It records for a duration of 15 seconds, blocking the execution of further code until the recording is complete.
+
+This line deletes the message box that was displayed during the recording.
+
+This line retrieves the recorded audio data from the `audiorecorder` object `z` and stores it in the variable `myRecording`.
+
+This line sets up a prompt message asking the user if they want to play the recorded audio file.
+
+This line sets the caption for the message box or dialog box that will appear when prompting the user to play the recorded file.
+
+This line displays a dialog box with the prompt message and title, along with two buttons labeled 'Yes' and 'No'. The user's response is stored in the variable `button`.
+
+This line checks if the user clicked the 'Yes' button by comparing the value stored in `button` with the string 'Yes'. The comparison is case-insensitive (`strcmpi`).
+
+This line plays the recorded audio using the `audiorecorder` object `z`.
+
+This line calls a function named `fourierTransform` and passes it the parameters: the sampling frequency (9000), the recorded audio data (`myRecording`), and two string arguments for displaying titles in the resulting output.
+
+This line calls a function named `recoverSignal` and passes it the parameters: the recorded audio data (`myRecording`), the sampling frequency (9000), and a threshold value (0.05).
+
+If the user selects `No` in the prompt message we displayed earlier, then else blog is executed.
+
+This line loads the 'handel.mat' file, which contains a pre-specified sound waveform
+
+This line sets the name of the output file to 'handel.wav'.
+
+This line writes the audio data (`y`) and the corresponding sampling frequency (`Fs`) to the 'handel.wav' file.
+
+This line clears the variables `y` and `Fs`, which were used to store the loaded audio data.
+
+This line reads the audio data and sampling frequency from the 'handel.wav' file and stores them in the variables `y` and `Fs`, respectively.
+
+This line sets up a prompt message asking the user which version of the pre-specified sound file they want to hear.
+
+This line sets the caption for the message box or dialog box that will appear when prompting the user to specify the sound version.
+
+This line displays a dialog box with the prompt message and title, along with three buttons labeled 'Perfect', 'Noisy', and 'Cancel'. The user's response is stored in the variable `button`.
+
+This line checks if the user clicked the 'Perfect' button by comparing the value stored in `button` with the string 'Perfect'. The comparison is case-insensitive (`strcmpi`).
+
+This line assigns the variable `signal` to the loaded audio data `y`.
+
+This line plays the perfect version of the pre-specified sound using the `soundsc` function, which scales the sound to fit the full dynamic range of the audio device.
+
+This line calls a function named `fourierTransform` and passes it the parameters: the sampling frequency (`Fs`), the perfect sound waveform (`y`), and two string arguments for displaying titles in the resulting output.
+
+This line checks if the user clicked the 'Noisy' button by comparing the value stored in button with the string 'Noisy'. The comparison is case-insensitive (strcmpi).
+
+This line sets up a prompt message asking the user to enter the noise factor to be added to the sound waveform.
+
+This line displays an input dialog box with the prompt message and stores the user's input in the variable answer.
+
+This line converts the user's input from a string to a numerical value and assigns it to the variable noiseFactor.
+
+This line adds random noise to the sound waveform by generating a vector of random numbers (randn) and scaling it by the noise factor. The noisy sound waveform is stored in the variable noisySound.
+
+This line assigns the variable signal to the noisy sound waveform.
+
+This line plays the noisy version of the pre-specified sound using the soundsc function.
+
+This line calls a function named fourierTransform and passes it the parameters: the sampling frequency (Fs), the noisy sound waveform (noisySound), and two string arguments for displaying titles in the resulting output.
+
+This line clears the sound object, releasing system resources.
+
+This line calls a function named recoverSignal and passes it the parameters: the noisy sound waveform (noisySound), the sampling frequency (Fs), and the noise factor.
+
+This line executes if the user clicked the 'Cancel' button or closed the dialog box without selecting a button. It is the end of the if-else block.
+
+---------------------------------------------------------------------------------------------------------------------
+

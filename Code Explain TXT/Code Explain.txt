@@ -1,0 +1,59 @@
+Assalam-u-Alikum, We are honored to unveil our remarkable DSP project. Firstly, we will shed light on the invaluable contributions made by two brilliant participants in crafting the code, followed by a comprehensive breakdown of each file's code. Our project comprises four pivotal files: Project_of_ADSP.m serves as the main file, amplifySound.m stands as the second, fourierTransform.m as the third, and lastly, recoverSignal.m takes the spotlight. Hamza Ikram has masterfully crafted the first two files, while Talha Arfan has astutely developed the latter pair. Now, let's embark on an enlightening journey through the intricate code of each file and unravel their extraordinary functionalities.
+---------------------------------------
+Now let's see the main file of the code: This code presents a MATLAB script that allows users to either record their own audio or choose from a pre-specified sound file for further processing. The script utilizes various MATLAB functions and dialog boxes to facilitate user interaction.
+
+If the user chooses to record their own audio, the code sets up an audio recorder object and prompts the user to speak for a duration of 15 seconds. After the recording is complete, the script provides an option to play back the recorded file. Additionally, the recorded audio undergoes a Fourier transform and the resulting wave and frequency spectrum are displayed.
+
+If the user decides not to record their own audio, the code loads a pre-existing sound file (in this case, "handel.wav") and gives the user the choice between a "Perfect" version or a "Noisy" version of the sound file. If the user selects the "Perfect" option, the script plays the sound file and displays the wave and frequency spectrum. If the user selects the "Noisy" option, they are prompted to enter a noise factor, and the sound file is mixed with Gaussian noise accordingly. The noisy sound is played, and its wave and frequency spectrum are displayed.
+
+In both cases, the code includes a call to the "recoverSignal" function, passing the recorded or selected sound data, the sampling frequency, and the noise factor (if applicable). The "recoverSignal" function is not shown in this code snippet but presumably performs some form of signal processing or noise reduction on the input audio data.
+
+Overall, this code provides a simple interface for recording and processing audio, allowing users to explore and analyze sound files or their own recordings.
+-----------------------------------------------
+Now let's see the amplifySound.m file: The provided code is a MATLAB function named amplifySignal that takes three input arguments: code, soundSignal, and Fs. This function amplifies an audio signal based on the provided code.
+
+Inside the function, there is a switch statement that checks the value of the code variable.
+
+If code is equal to 1, it calculates the maximum absolute value of the soundSignal and assigns it to max_signal. It then computes a factor by taking the reciprocal of the maximum signal value (1/max_signal). This factor is used to amplify the soundSignal by multiplying it element-wise with soundSignal, resulting in an amplifiedSignal.
+
+If code is equal to 2, it prompts the user to enter the amount of hearing loss in decibels (lossFactor). It converts the decibel value to a linear gain factor using the db2mag function. The soundSignal is then multiplied by this gain factor to obtain the amplifiedSignal.
+
+After amplification, the amplifiedSignal is played back using the soundsc function, which plays the audio at the specified sampling rate Fs. Additionally, the fourierTransform function is called to compute and display the Fourier transform of the amplifiedSignal, showing its wave and frequency spectrum.
+
+In summary, this function provides a way to amplify an audio signal based on the provided code. It handles both maximum signal amplification and amplification based on a specified hearing loss factor, and it also visualizes the amplified signal using a Fourier transform.
+--------------------------------------------
+Now let's see the fourierTransform.m file: The provided code is a MATLAB function named fourierTransform that takes four input arguments: Fs, signal, title1, and title2. This function performs a Fourier transform on the input signal and displays its waveform and frequency spectrum.
+
+The function first displays a dialog box asking the user if they would like to see the signal and its frequency response. The user can choose either "Yes" or "No".
+
+If the user selects "Yes", a figure window is created, and the time domain waveform and frequency spectrum of the signal are plotted.
+
+In the time domain plot, the x-axis represents time in seconds and is calculated based on the sampling rate Fs and the length of the signal. The signal is plotted against time, with the title specified by the title1 argument.
+
+In the frequency domain plot, the x-axis represents frequency in Hz. The number of points in the FFT is calculated as n, which is the length of the signal minus 1. The frequency range is then determined using the sampling rate Fs and divided into n points. The magnitude of the Fourier transform of the signal is computed using fft and stored in wavefft. The frequency spectrum is then plotted against the frequency range, with the title specified by the title2 argument.
+
+If the user selects "No" or closes the dialog box, the audio playback is stopped using clear sound.
+
+In summary, this function allows the user to visualize the waveform and frequency spectrum of an audio signal by performing a Fourier transform and displaying the plots. The user has the option to choose whether or not to view the graphs.
+---------------------------------------
+Now let's see the recoverSignal.m file: The provided code is a MATLAB function named recoverSignal that takes three input arguments: noisySound, Fs, and noiseFactor. This function attempts to recover a noisy sound signal using a wavelet-based denoising technique.
+
+The function first displays a dialog box asking the user if they want to recover the noisy sound. The user can choose either "Yes" or "No".
+
+If the user selects "Yes", the function checks if the noiseFactor is within the range of 0.01 and 0.15. If it is within this range, the denoising process proceeds.
+
+The wden function is used with the 'heursure' denoising method and 'sym4' wavelet. The noisySound is passed as input to the wden function, and the denoised/recovered sound is stored in the recoveredSound variable.
+
+The recovered sound is then played back using the soundsc function, with the sampling rate Fs. The fourierTransform function is called to compute and display the Fourier transform of the recovered sound, showing its waveform and frequency spectrum.
+
+Afterward, another dialog box is displayed, asking the user if they want to amplify the recovered signal. The user can choose either "Yes" or "No".
+
+If the user selects "Yes", another dialog box appears, asking how they want to amplify the recovered signal. The user can choose between "For Normal Person" or "For Hearing Impaired".
+
+Depending on the user's choice, the code variable is set accordingly. If the user chooses "For Normal Person", code is set to 1. If the user chooses "For Hearing Impaired", code is set to 2.
+
+Finally, the amplifySignal function is called with the code, recoveredSound, and Fs as input arguments to amplify the recovered sound.
+
+If the noiseFactor is not within the valid range (0.01-0.15), an error dialog box is displayed, informing the user that the signal cannot be recovered due to excessive distortion by noise.
+
+In summary, this function attempts to recover a noisy sound signal using denoising techniques. It provides options for the user to recover the sound, visualize the recovered signal, and optionally amplify it for different listening scenarios.
